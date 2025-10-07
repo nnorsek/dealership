@@ -38,6 +38,9 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faCircleUser} /> Sign in
         </li>
       </ul>
+      <div className="submit-listing">
+        <p>Submit Listing</p>
+      </div>
     </nav>
   );
 };
