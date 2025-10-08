@@ -1,0 +1,30 @@
+.selectSearch-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  border-radius: 35px;
+  border: 1px solid;
+}
+
+.form-container select {
+  border: none;
+  appearance: none; /* Removes default arrow (cross-browser) */
+  box-sizing: border-box;
+  padding: 1px 40px 1px 20px;
+}
+
+hr {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  position: relative;
+  border: none;
+  background-color: lightgrey;
+  height: 40px;
+  padding: 0.6px;
+}

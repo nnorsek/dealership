@@ -1,5 +1,6 @@
 import React from "react";
 import "./homeStyles/HomePage.css";
+import SelectSearch from "../components/SelectSearch";
 
 const HomePage = () => {
   return (
@@ -7,6 +8,7 @@ const HomePage = () => {
       <div className="home-text">
         <p>Find cars for sale and for rent near you</p>
         <h1>Find Your Dream Car</h1>
+        <SelectSearch />
       </div>
     </div>
   );
