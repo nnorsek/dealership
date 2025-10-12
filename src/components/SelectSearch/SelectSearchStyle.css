@@ -8,19 +8,14 @@
   align-items: center;
   padding: 5px 10px 5px 10px;
   border-radius: 35px;
-  border: 1px solid;
   background-color: white;
-}
-
-.fontawesome-icon-price {
-  padding-right: 40px;
+  position: relative;
 }
 
 hr {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-right: 10px;
   display: flex;
-  position: relative;
   border: none;
   background-color: lightgrey;
   height: 40px;
@@ -29,6 +24,10 @@ hr {
 
 .submit-button {
   cursor: pointer;
+  position: absolute;
+  right: 0px;
+  transform: translateY(-50%);
+  top: 50%;
 }
 
 .circle-icon {
@@ -38,4 +37,8 @@ hr {
 
 .circle-icon:hover {
   color: #0060bf;
+}
+
+.price-button {
+  padding-right: 55px;
 }

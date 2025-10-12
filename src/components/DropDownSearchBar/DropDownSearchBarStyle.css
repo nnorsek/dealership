@@ -1,20 +1,24 @@
 .dropdown-container {
   position: relative;
+  display: flex;
+  cursor: pointer;
 }
 
 .dropdown-button {
   border: none;
   appearance: none;
   background: white;
-  padding: 1px 40px 1px 20px;
+  padding: 1px 70px 1px 1px;
   cursor: pointer;
+  width: 180px;
 }
 
 .dropdown-menu {
   position: absolute;
+  top: 30px;
   overflow-y: auto;
   background-color: white;
-  width: 160px;
+  width: 200px;
   height: 200px;
   padding: 10px;
   border-radius: 20px;

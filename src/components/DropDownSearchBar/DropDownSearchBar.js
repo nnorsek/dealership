@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./DropDownStyle.css";
+import "./DropDownSearchBarStyle.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 const DropDown = ({ buttonText, items }) => {
   console.log("Items", items);
@@ -27,7 +29,7 @@ const DropDown = ({ buttonText, items }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
-
+  console.log("Toggle Drop Down", isOpen);
   return (
     <div className="dropdown-container">
       <button className="dropdown-button" onClick={toggleDropDown}>
@@ -45,6 +47,11 @@ const DropDown = ({ buttonText, items }) => {
             </li>
           ))}
         </ul>
+      )}
+      {!isOpen ? (
+        <FontAwesomeIcon icon={faAngleDown} onClick={toggleDropDown} />
+      ) : (
+        <FontAwesomeIcon icon={faAngleUp} onClick={toggleDropDown} />
       )}
     </div>
   );

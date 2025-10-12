@@ -7,7 +7,7 @@ import {
   faCircle,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import DropDown from "../DropDown/DropDown";
+import DropDown from "../DropDownSearchBar/DropDownSearchBar";
 
 // TODO -> Change to custom select components using framer for animation on arrows.
 
@@ -19,7 +19,7 @@ const SelectSearch = () => {
     condition: "",
     price: "",
   });
-
+  // TODO -> Pull from DB using API HTTP GET
   const modelItems = [
     { id: 1, value: "Any Make" },
     { id: 2, value: "Audi" },
@@ -54,20 +54,16 @@ const SelectSearch = () => {
   return (
     <div className="selectSearch-container">
       <div className="form-container">
-        <DropDown items={modelItems} buttonText={"Any Make"} />
-        <FontAwesomeIcon icon={faAngleDown} />
+        <DropDown items={modelItems} buttonText={"Any Condition"} />
+
+        <hr />
+        <DropDown items={modelItems} buttonText={"Any Model"} />
         <hr />
         <DropDown items={modelItems} buttonText={"Any Make"} />
-        <FontAwesomeIcon icon={faAngleDown} />
         <hr />
-        <DropDown items={modelItems} buttonText={"Any Make"} />
-        <FontAwesomeIcon icon={faChevronDown} />
-        <hr />
-        <DropDown items={modelItems} buttonText={"Any Make"} />
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className="fontawesome-icon-price"
-        />
+        <div className="price-button">
+          <DropDown items={modelItems} buttonText={"Any Price"} />
+        </div>
         <div className="submit-button">
           <button
             type="submit"
