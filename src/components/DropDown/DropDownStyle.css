@@ -1,0 +1,29 @@
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-button {
+  border: none;
+  appearance: none;
+  background: white;
+  padding: 1px 40px 1px 20px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  overflow-y: auto;
+  background-color: white;
+  width: 160px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 20px;
+  border: solid 1px grey;
+}
+
+.dropdown-item {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  overflow-y: auto;
+}

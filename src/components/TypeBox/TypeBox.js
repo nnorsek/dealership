@@ -1,5 +1,5 @@
 import React from "react";
-import "./componentStyles/TypeBox.css";
+import "./TypeBoxStyle.css";
 
 const TypeBox = (props) => {
   return (

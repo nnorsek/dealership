@@ -13,6 +13,7 @@
 }
 
 .navbar-container {
+  font-family: "Poppins", sans-serif;
   position: relative;
   display: flex;
   align-items: center;

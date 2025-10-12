@@ -12,17 +12,6 @@
   background-color: white;
 }
 
-.form-container select {
-  border: none;
-  appearance: none; /* Removes default arrow (cross-browser) */
-  box-sizing: border-box;
-  padding: 1px 40px 1px 20px;
-  cursor: pointer;
-}
-.form-container select:focus {
-  outline: none;
-}
-
 .fontawesome-icon-price {
   padding-right: 40px;
 }

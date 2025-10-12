@@ -1,7 +1,7 @@
 import React from "react";
-import "./homeStyles/HomePage.css";
-import SelectSearch from "../components/SelectSearch";
-import TypeBox from "../components/TypeBox";
+import "./HomePageStyle.css";
+import SelectSearch from "../components/SelectSearch/SelectSearch";
+import TypeBox from "../components/TypeBox/TypeBox";
 import sedan from "../images/sedan-car-13350.svg";
 
 const typebox = [

@@ -1,5 +1,5 @@
 import React from "react";
-import "./componentStyles/Navbar.css";
+import "./NavbarStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCar,
