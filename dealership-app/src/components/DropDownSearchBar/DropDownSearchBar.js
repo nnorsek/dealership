@@ -3,16 +3,17 @@ import "./DropDownSearchBarStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-const DropDown = ({ buttonText, items }) => {
-  console.log("Items", items);
-  console.log("Button Text", buttonText);
+const DropDown = ({ buttonText, items = [], onSelect, resetTrigger }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const dropdownRef = useRef(null);
 
   const handleItemClick = (item) => {
-    setSelectedOption(item.value);
-    setIsOpen(!isOpen);
+    setSelectedOption(item);
+    setIsOpen(false);
+    if (onSelect) {
+      onSelect(item);
+    }
   };
 
   const toggleDropDown = () => setIsOpen(!isOpen);
@@ -29,7 +30,11 @@ const DropDown = ({ buttonText, items }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
-  console.log("Toggle Drop Down", isOpen);
+
+  useEffect(() => {
+    setSelectedOption("");
+  }, [resetTrigger]);
+
   return (
     <div className="dropdown-container">
       <button className="dropdown-button" onClick={toggleDropDown}>
@@ -37,13 +42,13 @@ const DropDown = ({ buttonText, items }) => {
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
-          {(items || []).map((item) => (
+          {(items || []).map((item, index) => (
             <li
               className="dropdown-item"
-              key={item.id}
+              key={item || index}
               onClick={() => handleItemClick(item)}
             >
-              {item.value}
+              {item}
             </li>
           ))}
         </ul>

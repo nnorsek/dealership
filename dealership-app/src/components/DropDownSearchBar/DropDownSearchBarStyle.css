@@ -10,7 +10,7 @@
   background: white;
   padding: 1px 70px 1px 1px;
   cursor: pointer;
-  width: 180px;
+  width: 165px;
 }
 
 .dropdown-menu {
@@ -26,6 +26,7 @@
 }
 
 .dropdown-item {
+  color: black;
   list-style-type: none;
   cursor: pointer;
   padding: 10px;

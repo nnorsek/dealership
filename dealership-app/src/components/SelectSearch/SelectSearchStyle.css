@@ -42,3 +42,19 @@ hr {
 .price-button {
   padding-right: 55px;
 }
+
+.reset-filters {
+  top: 130%;
+  position: absolute;
+  width: 100px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  appearance: none;
+  cursor: pointer;
+  background-color: white;
+}
+
+.reset-filters:hover {
+  background-color: #f3f3f3;
+}

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import "./SelectSearchStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,35 +13,82 @@ import DropDown from "../DropDownSearchBar/DropDownSearchBar";
 
 const SelectSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [resetCounter, setResetCounter] = useState(0);
   const [filters, setFilters] = useState({
+    make: [],
+    model: [],
+    car_condition: [],
+    price: [],
+    year: [],
+  });
+
+  const [selectedFilters, setSelectedFilters] = useState({
     make: "",
     model: "",
-    condition: "",
     price: "",
+    car_condition: "",
+    year: "",
   });
-  // TODO -> Pull from DB using API HTTP GET
-  const modelItems = [
-    { id: 1, value: "Any Make" },
-    { id: 2, value: "Audi" },
-    { id: 3, value: "Bmw" },
-    { id: 4, value: "Ram" },
-    { id: 5, value: "Honda" },
-    { id: 6, value: "Suburu" },
-    { id: 7, value: "Jeep" },
-    { id: 8, value: "Ford" },
-    { id: 9, value: "Lexus" },
-    { id: 10, value: "Dodge" },
-  ];
 
-  const toggleDropDown = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/cars/all");
+        if (!response.ok) {
+          throw new Error(`HTTP Error!, ${response.status}`);
+        }
+        const data = await response.json();
+        setCars(data);
+        const make = [...new Set(data.map((car) => car.make))];
+        const car_condition = [
+          ...new Set(data.map((car) => car.car_condition)),
+        ];
+        const year = [...new Set(data.map((car) => car.year))];
+        const model = [...new Set(data.map((car) => car.model))];
+        const price = [...new Set(data.map((car) => car.price))];
 
-  const handleChange = (e) => {
-    console.log(e.target);
-    const { name, value } = e.target;
-    console.log("name: ", name, "value: ", value);
-    setFilters((prev) => ({ ...prev, [name]: value }));
+        setFilters({
+          make: make,
+          car_condition: car_condition,
+          year: year,
+          model: model,
+          price: price,
+        });
+      } catch (e) {
+        console.error("Failed to fetch all car details", e);
+      }
+    };
+
+    fetchCars();
+  }, []);
+
+  const handleFilterChange = (field, value) => {
+    const newSelected = { ...selectedFilters, [field]: value };
+    setSelectedFilters(newSelected);
+
+    // Filter the cars
+    const filtered = cars.filter((car) => {
+      return (
+        (!newSelected.make || car.make === newSelected.make) &&
+        (!newSelected.model || car.model === newSelected.model) &&
+        (!newSelected.car_condition ||
+          car.car_condition === newSelected.car_condition) &&
+        (!newSelected.price || car.price === newSelected.price) &&
+        (!newSelected.year || car.year === newSelected.year)
+      );
+    });
+    setFilteredCars(filtered);
+
+    // Update the available dropdown values based on filtered cars
+    setFilters({
+      make: [...new Set(filtered.map((c) => c.make))],
+      model: [...new Set(filtered.map((c) => c.model))],
+      price: [...new Set(filtered.map((c) => c.price))],
+      car_condition: [...new Set(filtered.map((c) => c.car_condition))],
+      year: [...new Set(filtered.map((c) => c.year))],
+    });
   };
 
   const handleSubmit = (e) => {
@@ -49,24 +96,76 @@ const SelectSearch = () => {
     console.log(`Submitting Filters: ${JSON.stringify(filters)}`);
 
     //Submit Search Logic Here
+    //Routes to page of cars
+  };
+
+  const resetFilters = () => {
+    console.log("reset filters");
+
+    setSelectedFilters({
+      make: "",
+      mode: "",
+      car_condition: "",
+      year: "",
+      price: "",
+    });
+
+    setFilteredCars(cars);
+
+    setFilters({
+      make: [...new Set(cars.map((car) => car.make))],
+      car_condition: [...new Set(cars.map((car) => car.car_condition))],
+      year: [...new Set(cars.map((car) => car.year))],
+      model: [...new Set(cars.map((car) => car.model))],
+      price: [...new Set(cars.map((car) => car.price))],
+    });
+
+    setResetCounter((prev) => prev + 1);
   };
 
   return (
     <div className="selectSearch-container">
       <div className="form-container">
-        <DropDown items={modelItems} buttonText={"Any Condition"} />
+        <DropDown
+          onSelect={(value) => handleFilterChange("car_condition", value)}
+          items={filters.car_condition}
+          buttonText={"Any Condition"}
+          resetTrigger={resetCounter}
+        />
 
         <hr />
-        <DropDown items={modelItems} buttonText={"Any Model"} />
+        <DropDown
+          onSelect={(value) => handleFilterChange("model", value)}
+          items={filters.model}
+          buttonText={"Any Model"}
+          resetTrigger={resetCounter}
+        />
         <hr />
-        <DropDown items={modelItems} buttonText={"Any Make"} />
+        <DropDown
+          onSelect={(value) => handleFilterChange("make", value)}
+          items={filters.make}
+          buttonText={"Any Make"}
+          resetTrigger={resetCounter}
+        />
+        <hr />
+        <DropDown
+          onSelect={(value) => handleFilterChange("year", value)}
+          items={filters.year}
+          buttonText={"Any Year"}
+          resetTrigger={resetCounter}
+        />
         <hr />
         <div className="price-button">
-          <DropDown items={modelItems} buttonText={"Any Price"} />
+          <DropDown
+            onSelect={(value) => handleFilterChange("price", value)}
+            items={filters.price}
+            buttonText={"Any Price"}
+            resetTrigger={resetCounter}
+          />
         </div>
         <div className="submit-button">
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="fa-layers fa-fw fa-3x"
             style={{
               border: "none",
@@ -83,6 +182,9 @@ const SelectSearch = () => {
             />
           </button>
         </div>
+        <button className="reset-filters" onClick={resetFilters}>
+          Reset Filters
+        </button>
       </div>
     </div>
   );

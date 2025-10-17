@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "dealership-app"
+	},
+	{
+		"path": "dealership-backend/start"
+	}
+],
+  "settings": {
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "automatic"
+  }
+}

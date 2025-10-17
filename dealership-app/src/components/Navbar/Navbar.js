@@ -20,10 +20,10 @@ const Navbar = () => {
         <p>+21 435-543-1000</p>
       </div>
       <ul className="horizontal-list">
-        <li>
+        <li className="home-dropdown">
           Home <FontAwesomeIcon icon={faAngleDown} />
         </li>
-        <li>
+        <li className="listing-dropdown">
           Listing <FontAwesomeIcon icon={faAngleDown} />{" "}
         </li>
         <li>
